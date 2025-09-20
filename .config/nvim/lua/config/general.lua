@@ -21,7 +21,7 @@ opts.timeoutlen = 300
 opts.splitright = true
 opts.splitbelow = true
 opts.list = true
-opts.listchars = { trail = '·', nbsp = '␣' }
+opts.listchars = { tab = '» ',trail = '·', nbsp = '␣' }
 opts.inccommand = 'split'
 opts.scrolloff = 10
 opts.confirm = true
@@ -48,5 +48,5 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.api.nvim_create_autocmd('TextYankPost', { -- :help event
 	desc = 'Highlight when yanking text', 
 	group = vim.api.nvim_create_augroup('highlight-yank', {clear = true}), 
-	callback = function() vim.highlight.on_yank({timeout = 300}) end, 
+callback = function() vim.highlight.on_yank({timeout = 300}) end, 
 })
