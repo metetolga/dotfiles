@@ -3,8 +3,12 @@ return {
     "nmac427/guess-indent.nvim",
     opts = {},
   },
-  {
+  { 
     'numToStr/Comment.nvim',
+    opts = {}
+  },
+  {
+    'm4xshen/autoclose.nvim', 
     opts = {}
   },
   {
