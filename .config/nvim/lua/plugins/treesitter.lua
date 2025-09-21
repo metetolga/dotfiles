@@ -15,6 +15,7 @@ return {
 			"query",
 			"vim",
 			"vimdoc",
+			"cpp",
 		},
 		auto_install = true,
 		highlight = {

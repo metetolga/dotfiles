@@ -1,5 +1,5 @@
 return {
-	{
+	{ -- Lua Development
 		"folke/lazydev.nvim",
 		ft = "lua",
 		opts = {
@@ -11,23 +11,11 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{
-				"mason-org/mason.nvim",
-				opts = {},
-			},
-			{
-				"mason-org/mason-lspconfig.nvim",
-			},
-			{
-				"WhoIsSethDaniel/mason-tool-installer.nvim",
-			},
-			{
-				"j-hui/fidget.nvim",
-				opts = {},
-			},
-			{
-				"saghen/blink.cmp",
-			},
+			{ "mason-org/mason.nvim", opts = {} },
+			{ "mason-org/mason-lspconfig.nvim" },
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+			{ "j-hui/fidget.nvim", opts = {} },
+			{ "saghen/blink.cmp" },
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -39,21 +27,13 @@ return {
 					end
 
 					map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
-
 					map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
-
 					map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-
 					map("gri", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-
 					map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-
 					map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
 					map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
-
 					map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
-
 					map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
 
 					local function client_supports_method(client, method, bufnr)
@@ -135,19 +115,9 @@ return {
 			})
 
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			vim.lsp.buf.hover()
 
 			local servers = {
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				-- ts_ls = {},
 				ruff = {
 					init_options = {
 						settings = {},
@@ -155,9 +125,6 @@ return {
 				},
 				pyright = {},
 				lua_ls = {
-					-- cmd = { ... },
-					-- filetypes = { ... },
-					-- capabilities = {},
 					settings = {
 						Lua = {
 							completion = {
@@ -166,8 +133,8 @@ return {
 						},
 					},
 				},
+				clangd = {},
 			}
-
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua",
@@ -186,93 +153,5 @@ return {
 				},
 			})
 		end,
-	},
-	{
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<leader>f",
-				function()
-					require("conform").format({ async = true, lsp_format = "fallback" })
-				end,
-				mode = "",
-				desc = "[F]ormat buffer",
-			},
-		},
-		opts = {
-			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					return nil
-				else
-					return {
-						timeout_ms = 500,
-						lsp_format = "fallback",
-					}
-				end
-			end,
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = {
-					"ruff_fix",
-					"ruff_format",
-					"ruff_organize_imports",
-				},
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use 'stop_after_first' to run the first available formatter from the list
-				-- javascript = { "prettierd", "prettier", stop_after_first = true },
-			},
-		},
-	},
-
-	{
-		"saghen/blink.cmp", -- Autocompletion
-		event = "VimEnter",
-		version = "1.*",
-		dependencies = {
-			{
-				"L3MON4D3/LuaSnip",
-				version = "2.*",
-				build = (function()
-					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-						return
-					end
-					return "make install_jsregexp"
-				end)(),
-				dependencies = {},
-				opts = {},
-			},
-			"folke/lazydev.nvim",
-		},
-		--- @module 'blink.cmp'
-		--- @type blink.cmp.Config
-		opts = {
-			keymap = {
-				preset = "default",
-			},
-			appearance = {
-				nerd_font_variant = "mono",
-			},
-			completion = {
-				documentation = { auto_show = false, auto_show_delay_ms = 500 },
-			},
-			sources = {
-				default = { "lsp", "path", "snippets", "lazydev" },
-				providers = {
-					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
-				},
-			},
-			snippets = { preset = "luasnip" },
-			fuzzy = { implementation = "lua" },
-			signature = { enabled = true },
-		},
 	},
 }
