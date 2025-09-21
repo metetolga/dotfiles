@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local opts = vim.opt 
+local opts = vim.opt
 
 vim.schedule(function()
   opts.clipboard = 'unnamedplus'
@@ -11,7 +11,7 @@ opts.breakindent = true
 opts.mouse = 'a'
 opts.number = true
 opts.relativenumber = true
-opts.showmode = false 
+opts.showmode = false
 opts.undofile = true
 opts.ignorecase = true
 opts.smartcase = true
