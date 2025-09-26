@@ -16,6 +16,12 @@ return {
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 			{ "j-hui/fidget.nvim", opts = {} },
 			{ "saghen/blink.cmp" },
+			{
+				"jglasovic/venv-lsp.nvim",
+				config = function()
+					require("venv-lsp").setup()
+				end,
+			},
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -134,6 +140,7 @@ return {
 					},
 				},
 				clangd = {},
+				eslint = {},
 			}
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
