@@ -16,6 +16,12 @@ return {
 			"vim",
 			"vimdoc",
 			"cpp",
+			"tsx",
+			"toml",
+			"json",
+			"yaml",
+			"css",
+			"html",
 		},
 		auto_install = true,
 		highlight = {
