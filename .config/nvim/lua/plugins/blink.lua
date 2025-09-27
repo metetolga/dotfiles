@@ -21,7 +21,11 @@ return {
 	--- @type blink.cmp.Config
 	opts = {
 		keymap = {
-			preset = "default",
+			preset = "none",
+			["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+			["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+			["<CR>"] = { "accept", "fallback" },
+			["<C-e>"] = { "hide" },
 		},
 		appearance = {
 			nerd_font_variant = "mono",
