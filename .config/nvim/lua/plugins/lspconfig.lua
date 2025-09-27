@@ -223,6 +223,73 @@ return {
 						end, {})
 					end,
 				},
+				html = {
+					cmd = { "vscode-html-language-server", "--stdio" },
+					filetypes = { "html", "templ" },
+					root_markers = { "package.json", ".git" },
+					settings = {},
+					init_options = {
+						provideFormatter = true,
+						embeddedLanguages = { css = true, javascript = true },
+						configurationSection = { "html", "css", "javascript" },
+					},
+				},
+				cssls = {
+					cmd = { "vscode-css-language-server", "--stdio" },
+					filetypes = { "css", "scss", "less" },
+					init_options = { provideFormatter = true }, -- needed to enable formatting capabilities
+					root_markers = { "package.json", ".git" },
+					settings = {
+						css = { validate = true },
+						scss = { validate = true },
+						less = { validate = true },
+					},
+				},
+				css_variables = {
+					cmd = { "css-variables-language-server", "--stdio" },
+					filetypes = { "css", "scss", "less" },
+					root_markers = { "package.json", ".git" },
+					settings = {
+						cssVariables = {
+							lookupFiles = { "**/*.less", "**/*.scss", "**/*.sass", "**/*.css" },
+							blacklistFolders = {
+								"**/.cache",
+								"**/.DS_Store",
+								"**/.git",
+								"**/.hg",
+								"**/.next",
+								"**/.svn",
+								"**/bower_components",
+								"**/CVS",
+								"**/dist",
+								"**/node_modules",
+								"**/tests",
+								"**/tmp",
+							},
+						},
+					},
+				},
+				emmet_ls = {
+					cmd = { "emmet-ls", "--stdio" },
+					filetypes = {
+						"astro",
+						"css",
+						"eruby",
+						"html",
+						"htmlangular",
+						"htmldjango",
+						"javascriptreact",
+						"less",
+						"pug",
+						"sass",
+						"scss",
+						"svelte",
+						"templ",
+						"typescriptreact",
+						"vue",
+					},
+					root_markers = { ".git" },
+				},
 			}
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
