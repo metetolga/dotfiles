@@ -41,6 +41,7 @@ return {
 					map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
 					map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
 					map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
+					map("grl", vim.diagnostic.setqflist, "[G]et Diagnostic [L]ist")
 
 					local function client_supports_method(client, method, bufnr)
 						if vim.fn.has("nvim-0.11") == 1 then
@@ -129,7 +130,19 @@ return {
 						settings = {},
 					},
 				},
-				pyright = {},
+				pyright = {
+					settings = {
+						pyright = {
+							disableOrganizeImports = true,
+							disableTaggedHints = true,
+						},
+						python = {
+							analysis = {
+								ignore = { '*' },
+							},
+						},
+					},
+				},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -290,6 +303,7 @@ return {
 					},
 					root_markers = { ".git" },
 				},
+				texlab = {},
 			}
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
