@@ -23,6 +23,8 @@ return {
 			"css",
 			"html",
 			"latex",
+			"make", 
+			"sql"
 		},
 		auto_install = true,
 		highlight = {

@@ -23,12 +23,13 @@ opts.splitbelow = true
 opts.list = true
 opts.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 opts.inccommand = "split"
-opts.scrolloff = 10
+opts.scrolloff = 5
 opts.confirm = true
 opts.tabstop = 2
 opts.shiftwidth = 2
 opts.softtabstop = 2
 opts.expandtab = true
+vim.g.python3_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
 
 local map = function(mod, l, r, opts)
 	opts = opts or {}

@@ -139,3 +139,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh

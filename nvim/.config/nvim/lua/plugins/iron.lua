@@ -72,8 +72,6 @@ return {
         exit = "<space>sq",
         clear = "<space>cl",
       },
-      -- If the highlight is on, you can change how it looks
-      -- For the available options, check nvim_set_hl
       highlight = {
         italic = true
       },

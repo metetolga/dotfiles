@@ -17,7 +17,7 @@ return {
 			{ "j-hui/fidget.nvim", opts = {} },
 			{ "saghen/blink.cmp" },
 			{
-				"jglasovic/venv-lsp.nvim",
+				"jglasovic/venv-lsp.nvim", -- automatic venv detection for poetry
 				config = function()
 					require("venv-lsp").setup()
 				end,
